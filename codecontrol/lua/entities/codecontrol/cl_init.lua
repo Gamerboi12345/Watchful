@@ -1,4 +1,3 @@
-AddCSLuaFile("cl_init.lua")
 include("shared.lua")
 
 
@@ -101,7 +100,7 @@ CodeBB.DoClick = function()
     Framsure:SetVisible( true )
     Framsure:Center()
     Framsure:SetDraggable( false )
-    Framsure:ShowCloseButton( false )
+    Framsure:ShowCloseButton( true )
     Framsure:MakePopup()
     Framsure.Paint = function(self, w, h)
         draw.RoundedBox(2, 0, 0, w, h, Color(50,50,50))
@@ -141,15 +140,16 @@ end)
 
 
 net.Receive("ClientCodeUpdate",function()
-    c = net.ReadString()
-    --print("Client Received!", c)
-    --For whoever reads this code, I am dearly sorry for this longass code.
-    --FIXME:Add system to stop non foundation team members from seeing code console
-    if c == "g" then CodeMaterial = Material( "materials/codecontrol/CodeGreen.png" , "codegreen") surface.PlaySound("CodeGreenBetter2.wav") chat.AddText( Color( 100, 0,0 ),"|Site Systems|",Color(0,100,0), " Code Green ",Color(255,255,255), "has been put into effect!") end
-    if c == "y" then CodeMaterial = Material( "materials/codecontrol/CodeYellow.png" , "codeyellow") surface.PlaySound("CodeYellowLat.wav") chat.AddText( Color( 100, 0,0 ),"|Site Systems|",Color(200,200,0), " Code Yellow ",Color(255,255,255), "has been put into effect!") end
-    if c == "r" then CodeMaterial = Material( "materials/codecontrol/CodeRed.png" , "codered") surface.PlaySound("CodeRedWatch.wav") chat.AddText( Color( 100, 0,0 ),"|Site Systems|",Color(150,0,0), " Code Red ",Color(255,255,255), "has been put into effect!") end
-    if c == "b" then CodeMaterial = Material( "materials/codecontrol/CodeBlack.png" , "codeblack") surface.PlaySound("CodeBlackAya.wav") chat.AddText( Color( 100, 0,0 ),"|Site Systems|",Color(0,0,0), " Code Black ",Color(255,255,255), "has been put into effect!") end
-    if c == "w" then CodeMaterial = Material( "materials/codecontrol/CodeWhite.png" , "codewhite") surface.PlaySound("CodeWhiteWatch.wav") chat.AddText( Color( 100, 0,0 ),"|Site Systems|",Color(200,200,200), " Code White ",Color(255,255,255), "has been put into effect!") end
+    if LocalPlayer().Team() == 31 then
+        c = net.ReadString()
+        --print("Client Received!", c)
+        --For whoever reads this code, I am dearly sorry for this longass code.
+        if c == "g" then CodeMaterial = Material( "materials/codecontrol/CodeGreenV3.png" , "codegreen") surface.PlaySound("CodeGreenWatch.wav") chat.AddText( Color( 100, 0,0 ),"|Site Systems|",Color(0,100,0), " Code Green ",Color(255,255,255), "has been put into effect!") end
+        if c == "y" then CodeMaterial = Material( "materials/codecontrol/CodeYellowV3.png" , "codeyellow") surface.PlaySound("CodeYelloWatch.wav") chat.AddText( Color( 100, 0,0 ),"|Site Systems|",Color(200,200,0), " Code Yellow ",Color(255,255,255), "has been put into effect!") end
+        if c == "r" then CodeMaterial = Material( "materials/codecontrol/CodeRedV3.png" , "codered") surface.PlaySound("CodeRedWatchful.wav") chat.AddText( Color( 100, 0,0 ),"|Site Systems|",Color(150,0,0), " Code Red ",Color(255,255,255), "has been put into effect!") end
+        if c == "b" then CodeMaterial = Material( "materials/codecontrol/CodeBlackV2.png" , "codeblack") surface.PlaySound("CodeBlackWatch.wav") chat.AddText( Color( 100, 0,0 ),"|Site Systems|",Color(0,0,0), " Code Black ",Color(255,255,255), "has been put into effect!") end
+        if c == "w" then CodeMaterial = Material( "materials/codecontrol/CodeWhiteV2.png" , "codewhite") surface.PlaySound("CodeWhiteWatchful.wav") chat.AddText( Color( 100, 0,0 ),"|Site Systems|",Color(200,200,200), " Code White ",Color(255,255,255), "has been put into effect!") end
+    end
 end )
 
 CodeMaterial = Material( "materials/codecontrol/CodeGreen.png" , "codegreen")
@@ -161,7 +161,7 @@ CodeMaterial = Material( "materials/codecontrol/CodeGreen.png" , "codegreen")
 hook.Add("HUDPaint", "ClientCodePaint", function()
     surface.SetDrawColor( 255, 255, 255, 255 ) -- Set the drawing color
     surface.SetMaterial( CodeMaterial ) -- Use our cached material
-    surface.DrawTexturedRect( 0, 0, 230, 70 ) -- Actually draw the rectangle
+    surface.DrawTexturedRect( 25, 10, 200, 34 ) -- Actually draw the rectangle
 end )
 
 
