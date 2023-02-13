@@ -1,16 +1,18 @@
+AddCSLuaFile()
 -- USER CONFIGURATION --
 
 BreachTime = 1 -- In seconds
 AnnouncementEnabled = false -- true/false Custom sound file that plays when a certain SCP breaches. Ensure you have the sounds in a content pack so your player can hear them!
 BreachPos = {
 
- {1, Vector(112, 783, -12288), "scp682.wav"}, --I was going to put how to do this here, but just contact Watchful#5406 on discord for help if you dont understand.
+ {1, Vector(112, 783, -12288), "scp682.wav"},
+ {2, Vector(112, 783, -12288), "scp682.wav"}, --I was going to put how to do this here, but just contact Watchful#5406 on discord for help if you dont understand.
 
 }
 
 -- END USER CONFIGURATION! DO NOT TOUCH ANYTHING PAST HERE! --
 
-AddCSLuaFile()
+print("Watchful SCP Breacher loading...")
 
 SWEP.PrintName = "SCP Breach SWEP"
 SWEP.Slot = 1
@@ -32,6 +34,15 @@ SWEP.Secondary.ClipSize = -1
 SWEP.Secondary.DefaultClip = -1
 SWEP.Secondary.Automatic = false
 SWEP.Secondary.Ammo = "none"
+
+print("Watchful SCP breacher variables loaded")
+
+timer.Create("watchscpbreachdebug",10,0,function()
+    if CLIENT then return end
+    print("Watchful Debug Information : SCPBREACHER")
+    PrintTable(SWEP)
+    PrintTable(BreachPos)
+end)
 
 concommand.Add("pos", function(ply)
     if CLIENT then return end
